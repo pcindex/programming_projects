@@ -38,3 +38,23 @@ Item Quantity: 		2
 Item Price: 		0.99
 Date Log: 		Mon Aug 15 15:29:18 2022
 
+Item Name: 		imchi
+Item Quantity: 		4
+Item Price: 		4.56
+Date Log: 		Mon Aug 15 16:08:54 2022
+
+Item Name: 		Bean
+Item Quantity: 		20
+Item Price: 		1.23
+Date Log: 		Mon Aug 15 16:09:04 2022
+
+Item Name: 		Kimchi
+Item Quantity: 		4
+Item Price: 		3.45
+Date Log: 		Mon Aug 15 16:10:08 2022
+
+Item Name: 		Milk
+Item Quantity: 		30
+Item Price: 		2.34
+Date Log: 		Mon Aug 15 16:10:37 2022
+

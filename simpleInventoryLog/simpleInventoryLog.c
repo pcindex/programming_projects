@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
+#include <ctype.h>
+#include <string.h>
 
 typedef struct
 {
@@ -19,12 +21,12 @@ void logHeader()
 
 void logBody(long option, FILE *fileptr)
 {
-    char input[255];
-    char *endptr;
-
     if(option == 1)
     {
         int numItem = 0;
+
+        char input[255];
+        char *endptr;
 
         if(fileptr == NULL)
         {
@@ -34,7 +36,13 @@ void logBody(long option, FILE *fileptr)
 
         printf("\n*** New Inventory ***\n");
         printf("Number of new items: \t");
-        scanf("%d", &numItem);
+        fgets(input, sizeof(input), stdin);
+        while(strstr(input, "."))
+        {
+            printf("--- Wrong format: Please enter whole number only: ");
+            fgets(input, sizeof(input), stdin);
+        }
+        numItem = (int)strtol(input, &endptr, 10);
 
         myInventory *item = malloc(sizeof(myInventory) * numItem);
 
@@ -43,15 +51,19 @@ void logBody(long option, FILE *fileptr)
             time_t now = time(NULL);
 
             printf("\nItem (%d) name: \t\t", i+1);
-            getchar();
             fgets(item[i].name, sizeof(item[i].name) - 2, stdin);
             printf("Item (%d) quantity: \t", i+1);
-            while(scanf("%d", &item[i].qty) != 1)
+            fgets(input, sizeof(input), stdin);
+            while(strstr(input, "."))
             {
                 printf("--- Wrong format: Please enter whole number only: ");
+                fgets(input, sizeof(input), stdin);
             }
+            item[i].qty = (int)strtol(input, &endptr, 10);
+
             printf("Item (%d) price: \t", i+1);
-            scanf("%f", &item[i].cost);
+            fgets(input, sizeof(input), stdin);
+            item[i].cost = strtof(input, &endptr);
             item[i].t = time(&now);
 
             fprintf(fileptr, "Item Name: \t\t%s", item[i].name);
@@ -64,13 +76,13 @@ void logBody(long option, FILE *fileptr)
     else if(option == 2)
     {
         char line[255];
-        char c = 'y';        //c is assigned for getting more inventory pages
+        char c[] = "y";        //c is assigned for getting more inventory pages
 
         int page = 1;
 
         printf("\n*** All Inventory ***\n");
         
-        while(c == 'y')
+        while(strcmp(c, "y") == 0)
         {
             printf("\nPage %d\n", page);
             printf("------------------------------------------\n");
@@ -91,16 +103,18 @@ void logBody(long option, FILE *fileptr)
             }
 
             printf("Load next inventory page? [y,n]:\t");
-            scanf("%s", &c);
-            page++;
+            fgets(c, sizeof(c), stdin);
+            getchar();
 
-            if(c == 'n') break;
-
-            while(c != 'y' && c != 'n')
+            while(strcmp(c, "y") != 0 && strcmp(c, "n") != 0)
             {
                 printf("--- Please enter 'y' or 'n':\t\t");
-                scanf("%s", &c);
+                fgets(c, sizeof(c), stdin);
+                getchar();
             }
+            page++;
+
+            if(strcmp(c, "n") == 0) break;
         }
     }
     else if(option == 3)
@@ -110,7 +124,8 @@ void logBody(long option, FILE *fileptr)
         {
             printf("Successful inventory reset\n");
 
-        }else
+        }
+        else
         {
             printf("Unable to reset the inventory. Please try again\n");
         }
@@ -125,7 +140,7 @@ void logFooter()
 
 int main()     //int argc, char *argv[]
 {
-    long option = 0;
+    int option = 0;
     char input[255];
     char *endptr;
 
@@ -146,7 +161,7 @@ int main()     //int argc, char *argv[]
 
         printf("\nPlease choose an option: ");
         fgets(input, sizeof(input), stdin);
-        option = strtol(input, &endptr, 10);
+        option = (int)strtol(input, &endptr, 10);
         
         if(option == 4)
         {
@@ -156,13 +171,9 @@ int main()     //int argc, char *argv[]
 
         while(option != 1 && option != 2 && option != 3 && option != 4 )
         {
-            if(option == '\n'){
-                fgets(input, sizeof(input), stdin);
-                option = strtol(input, &endptr, 10);    
-            }
-            printf("--- Please choose a valid option: ");       //FIX::after option = 2 terminates, the user input is skipped and gets within this while loop.
+            printf("--- Please choose a valid option: ");
             fgets(input, sizeof(input), stdin);
-            option = strtol(input, &endptr, 10);
+            option = (int)strtol(input, &endptr, 10);
         }
         logBody(option, fp);
     }
