@@ -1,0 +1,40 @@
+Item Name: 		Bacon
+Item Quantity: 		10
+Item Price: 		5.67
+Date Log: 		Sun Aug 14 15:36:24 2022
+
+Item Name: 		Egg
+Item Quantity: 		50
+Item Price: 		2.34
+Date Log: 		Sun Aug 14 16:19:15 2022
+
+Item Name: 		Cheese
+Item Quantity: 		100
+Item Price: 		1.23
+Date Log: 		Sun Aug 14 16:19:33 2022
+
+Item Name: 		Kiwi
+Item Quantity: 		5
+Item Price: 		5.67
+Date Log: 		Sun Aug 14 16:27:37 2022
+
+Item Name: 		Apple
+Item Quantity: 		10
+Item Price: 		6.78
+Date Log: 		Sun Aug 14 16:27:44 2022
+
+Item Name: 		Banana
+Item Quantity: 		20
+Item Price: 		2.34
+Date Log: 		Sun Aug 14 16:27:54 2022
+
+Item Name: 		Pie
+Item Quantity: 		50
+Item Price: 		2.39
+Date Log: 		Mon Aug 15 15:22:56 2022
+
+Item Name: 		sal
+Item Quantity: 		2
+Item Price: 		0.99
+Date Log: 		Mon Aug 15 15:29:18 2022
+
